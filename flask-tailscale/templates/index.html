@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configure Tailscale</title>
+</head>
+
+<body>
+    <h1>Configure Tailscale</h1>
+    <button id="startTailscaleButton">Start Tailscale</button>
+    <p id="startResponse"></p>
+
+    <script>
+        document.getElementById("startTailscaleButton").addEventListener("click", function () {
+            fetch("http://localhost:5500/start-tailscale", {
+                method: "POST"
+            })
+            console.log("called api")
+                .then(response => response.json())
+                console.log("going error")
+                .then(data => {
+                    console.log("ok")
+                    document.getElementById("startResponse").innerText = data.message;
+                })
+                .catch(error => {
+                    console.log("error")
+                    document.getElementById("startResponse").innerText = "Error: " + error;
+                });
+        });
+    </script>
+</body>
+
+</html>
